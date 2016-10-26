@@ -1,0 +1,16 @@
+<div class="bm-container">
+    <ul ng-if="!$stateParams.leftSideF" class="bm-left-side">
+        <li ng-class="{on: $state.includes('clearing.finance')}"><a ui-sref='clearing.finance'><i class="svg-houtai_licaiqinsuan svg-houtai_licaiqinsuan-dims"></i>理财清算</a></li>
+        <li ng-class="{on: $state.includes('clearing.experience')}"><a ui-sref='clearing.experience'><i class="svg-houtai_leftico_tybqs svg-houtai_leftico_tybqs-dims"></i>体验标清算</a></li>
+    </ul>
+    <div class="bm-content" ng-class="{'left-side-hide':$stateParams.leftSideF}">
+        <p class="breadcrumbs">当前位置：清算系统 >
+          <span class="item" ng-repeat="item in $stateParams.route">
+            <a ui-sref="{{item.url}}" ng-if="$index + 1 < $stateParams.route.length">{{item.title}}</a>
+            <span ng-if="$index + 1 == $stateParams.route.length">{{item.title}}</span>
+            <span ng-if="$index + 1 < $stateParams.route.length">></span>
+          </span>
+        </p>
+        <div ui-view></div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<header class="bm-header">
+    <div class="bm-header-wrap">
+        <p class="left">后台管理系统</p>
+        <div class="center">
+            <ul>
+                <li ng-repeat="item in bm.headerNavList">
+                    <a ng-class="{on:$state.includes(item.stateReg)}" ng-mouseenter="bm['headerNavHover'+$index]=true;" ng-mouseleave="bm['headerNavHover'+$index]=false;" ui-sref="{{item.sref}}"><i class="{{item.defaultClass}}" ng-class="{'{{item.hoverClass}}':bm['headerNavHover'+$index],'{{item.activeClass}}':$state.includes(item.stateReg)}"></i>{{item.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right" ng-show="!!bm.userName">
+            <span>你好，&nbsp;<span class="user-name" ng-click="bm.myCenter()">{{bm.userName}}</span></span>|<span class="logout" ng-click="bm.logout()">注销</span>
+        </div>
+    </div>
+</header>

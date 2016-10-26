@@ -1,0 +1,183 @@
+<div class="cf-con-wrap">
+    <div class="control-group">
+        <form class="form-inline search-wrap">
+            <div class="line">
+                <div class="form-group inpW">
+                    <label for="pro_name">产品名称</label>
+                    <input ng-model="cf.productName" type="text" class="form-control inp" id="pro_name">
+                </div>
+                <div class="form-group inpW">
+                    <label for="pj_code">项目代码</label>
+                    <input ng-model="cf.projectCode" type="text" class="form-control inp" id="pj_code">
+                </div>
+            </div>
+            <div class="line">
+                <div class="form-group inpW">
+                    <label for="repay_date_start">到期日</label>
+                    <input ng-click="cf.dateOpen0()" uib-datepicker-popup="{{cf.format}}" on-open-focus=false close-on-date-selection=false close-text="确定" clear-text="清空" current-text="今天" is-open="cf.popup0.opened" datepicker-options="cf.dateOptions" close-text="Close" ng-model="cf.startMaturityDate" type="text" class="form-control inp sl" id="repay_date_start" placeholder="-请选择-" readonly>
+                    <i ng-click="cf.dateOpen0()" class="svg-houtai_canlender svg-houtai_canlender-dims calendar"></i>
+                </div>
+                <div class="form-group inpW to">
+                    <label for="repay_date_end">到</label>
+                    <input ng-click="cf.dateOpen1()" uib-datepicker-popup="{{cf.format}}" on-open-focus=false close-on-date-selection=false close-text="确定" clear-text="清空" current-text="今天" is-open="cf.popup1.opened" datepicker-options="cf.dateOptions" close-text="Close" ng-model="cf.endMaturityDate" type="text" class="form-control inp sl" id="repay_date_end" placeholder="-请选择-" readonly>
+                    <i ng-click="cf.dateOpen1()" class="svg-houtai_canlender svg-houtai_canlender-dims calendar"></i>
+                </div>
+            </div>
+        </form>
+        <div class="controls">
+            <button class="btn" ng-click="cf.queryFinance()">查询</button>
+            <button class="btn" ng-click="cf.reset()">重置</button>
+        </div>
+    </div>
+    <div class="cf-list-con">
+        <div class="search-result">
+            <span class="s_btn" ng-class="{enabled:cf.financeItems.length>0,active:cf.checkAllF}" ng-click="cf.checkAllClick()">全选</span>
+            <a ng-if="cf.financeItems.length>0" href="{{cf.downloadUrl}}" target="_blank"  ng-class="{active:cf.financeItems.length>0}"><span uib-popover="下载查询结果中所有产品的出款明细" popover-trigger="mouseenter" ng-click="cf.downloadOutDetail()">下载出款明细</span></a>
+            <span class="s_btn" ng-if="cf.financeItems.length==0"><span uib-popover="下载查询结果中所有产品的出款明细" popover-trigger="mouseenter" ng-click="cf.downloadOutDetail()">下载出款明细</span></span>
+<!--            <span class="s_btn" ng-class="{'enabled active':cf.checkF}" ng-click="cf.payCouponsBatch()">批量优惠券充值</span>
+            <span ng-if="cf.userRole=='m1'" class="s_btn" ng-class="{'enabled active':cf.checkF}" ng-click="cf.applyLoanBatch()">申请批量放款</span>
+            <span ng-if="cf.userRole=='m2'" class="s_btn" ng-class="{'enabled active':cf.checkF}" ng-click="cf.approveLoanBatch()">批量放款审核</span>
+            <span ng-if="cf.userRole=='m1'" class="s_btn" ng-class="{'enabled active':cf.checkF}" ng-click="cf.applyRecycleBatch()">申请批量回款</span>
+            <span ng-if="cf.userRole=='m2'" class="s_btn" ng-class="{'enabled active':cf.checkF}" ng-click="cf.approveReturnMoneyBatch()">批量回款审核</span>-->
+            <div class="search-num">共有<span>{{cf.pagination.bigTotalItems}}</span>条产品记录</div>
+        </div>
+        <div class="items-wrap clearfix">
+            <div class="l">
+                <div class="header clearfix">
+                    <span class="w w0">选择</span>
+                </div>
+                <ul class="items">
+                    <li class="item clearfix" ng-class="{err:item.status==5&&item.lendStatus==1}" ng-repeat="item in cf.financeItems">
+                        <span class="w w0">
+                            <label class="checkbox-inline cb-btn">
+                                <input type="checkbox" name="checkbox" ng-model="cf.checkbox[item.id].flag" ng-change="cf.checkChange()" >
+                            </label>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="r clearfix">
+                <div class="left">
+                    <div class="l_wrap">
+                        <div class="header clearfix">
+                            <span class="w w2">产品代码</span>
+                            <span class="w w3">产品名称</span>
+                            <span class="w w1">合作方</span>
+                            <span class="w w2">实际募集总金额</span>
+                            <span class="w w2">现金总金额</span>
+                            <span class="w w2">优惠券抵扣总金额<i uib-popover="优惠券抵扣总金额未确认充值时，以橙色显示" popover-trigger="mouseenter" class="svg-group_copy svg-group_copy-dims coupon"></i></span>
+                            <span class="w w2">项目代码</span>
+                            <span class="w w2">销售起始时间</span>
+                            <span class="w w2">销售截止时间</span>
+                            <span class="w w2">到期日</span>
+                            <span class="w w2">到期回款总额</span>
+                            <span class="w w2">平台贴息总额</span>
+                            <span class="w w2">平台佣金</span>
+                        </div>
+                        <ul class="items">
+                            <li class="item clearfix" ng-class="{err:item.status==5&&item.lendStatus==1}" ng-repeat="item in cf.financeItems">
+                                <span class="w w2"><span>{{item.pcode}}</span></span>
+                                <span class="w w3"><span>{{item.productName}}</span></span>
+                                <span class="w w1">{{item.bizCooperator}}</span>
+                                <span class="w w2">￥{{item.raiseAmount}}</span>
+                                <span class="w w2">￥{{item.cashAmount}}</span>
+                                <span class="w w2" ng-class="{orange:item.discountAmount>0&&item.subsidyFlag==0}">￥{{item.discountAmount | numformatting : 'Thousands'}}</span>
+                                <span class="w w2">{{item.projectCode}}</span>
+                                <span class="w w2">{{item.subscriptionStartTime | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+                                <span class="w w2">{{item.subscriptionEndTime | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+                                <span class="w w2">{{item.maturityDate | date:"yyyy.MM.dd"}}</span>
+                                <span class="w w2">￥{{item.receiveAmount}}</span>
+                                <span class="w w2">￥{{item.subsidyAmount}}</span>
+                                <span class="w w2">￥{{item.brokerage}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="header clearfix">
+                        <span class="w w6">产品进度</span>
+                        <span class="w w7 last">操作</span>
+                    </div>
+                    <ul class="items">
+                        <li class="item clearfix" ng-class="{err:item.status==5&&item.lendStatus==1}" ng-repeat="item in cf.financeItems">
+                            <span class="w w6">{{item.status}}</span>
+                            <span ng-if="item.bizCooperator==1" class="w w7 operate">
+                                <span>--</span>
+                            </span>
+                            <span ng-if="item.bizCooperator!=1" class="w w7 operate">
+                                <span ng-show="item.status==1||item.status==12||(item.status==3&&item.subsidyFlag==1&&cf.userRole=='m2')
+                                ||(item.status==4&&cf.userRole=='m1')||(item.status==6&&(cf.userRole=='m2'||item.canReturnMoney==0))
+                                ||(item.status==7&&cf.userRole=='m1')">--</span>
+                                <a ng-show="item.status==2&&item.countAmount==0" ng-click="cf.statistic(item.productCode, item.productName)">统计金额</a>
+                                <a ng-show="item.status==2&&item.countAmount==1" ng-click="cf.confirmRaise(item.productCode, item.productName, item.bizCooperator,item.id)">确认募集状态</a>
+                                <a ng-show="item.status==3&&item.subsidyFlag==0" ng-click="cf.payCoupons(item.productCode, item.discountAmount)">优惠券充值</a>
+                                <a ng-show="item.status==3&&item.subsidyFlag==1&&cf.userRole=='m1'" ng-click="cf.applyLoan(item.id, item.productCode)">申请放款</a>
+                                <a ng-show="item.status==4&&cf.userRole=='m2'" ng-click="cf.approveLoan(item.productCode, item.productName, item.id)">放款审核</a>
+                                <a ng-show="item.status==5" ng-click="cf.showProgressInstruct(item.productCode)">查看清算指令</a>
+                                <a ng-show="item.status==6&&item.canReturnMoney==1&&cf.userRole=='m1'" ng-click="cf.applyRecycle(item.id)">申请回款</a>
+                                <a ng-show="item.status==7&&cf.userRole=='m2'" ng-click="cf.approveReturnMoney(item.id)">回款审核</a>
+                                <!--<a ng-show="item.status==10&&cf.userRole=='m1'" ng-click="cf.applyRefund(item.id)">申请退款</a>-->
+                                <!--<a ng-show="item.status==18&&cf.userRole=='m2'">退款审核</a>-->
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="no-data" ng-show="!cf.financeItems||cf.financeItems.length==0">
+                <p><i class="svg-houtai_seachicon svg-houtai_seachicon-dims"></i>暂无查询结果</p>
+            </div>
+        </div>
+        <div class="pagination_wrap" ng-show="cf.financeItems&&cf.financeItems.length>0">
+            <uib-pagination previous-text="<上一页" next-text="下一页>" total-items="cf.pagination.bigTotalItems" ng-model="cf.pagination.bigCurrentPage" max-size="cf.pagination.maxSize" items-per-page='cf.pagination.numPerPage' ng-change="cf.pagination.pageChanged()" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+    </div>
+    <script type="text/ng-template" id="cf-instruct-dialog">
+        <div class="dialog-content">
+            <div class="d-header">清算指令执行<i ng-click="closeThisDialog()" class="svg-btn-manageproject-close-white svg-btn-manageproject-close-white-dims"></i></div>
+            <div class="content">
+                <div class="top">
+                    <p>
+                        <span>产品代码：{{product.pcode}}</span>
+                        <span>合作方：{{product.bizCooperator | partner_type}}</span>
+                        <span class="pro_s">产品进度：{{product.status | product_status}}</span>
+                    </p>
+                    <p>
+                        <span>实际募集金额：￥{{product.raiseAmount | numformatting : 'Thousands'}}</span>
+                        <span>现金总金额：￥{{product.cashAmount | numformatting : 'Thousands'}}</span>
+                        <span>优惠券抵扣总金额：￥{{product.discountAmount | numformatting : 'Thousands'}}</span>
+                    </p>
+                    <p>
+                        <span>到期回款总额：￥{{product.receiveAmount | numformatting : 'Thousands'}}</span>
+                        <span>平台贴息总金额：￥{{product.subsidyAmount | numformatting : 'Thousands'}}</span>
+                        <span>平台佣金：￥{{product.brokerage | numformatting : 'Thousands'}}</span>
+                    </p>
+                </div>
+                <div class="cf-list-con">
+                    <div class="header clearfix">
+                        <span class="w w1">清算指令ID</span>
+                        <span class="w w1">清算类型</span>
+                        <span class="w w1">清算金额</span>
+                        <span class="w w1">创建时间</span>
+                        <span class="w w2">清算流水号</span>
+                        <span class="w w1">清算完成时间</span>
+                        <span class="w w1">执行状态</span>
+                        <span class="w w3 last">执行备注</span>
+                    </div>
+                    <ul class="items">
+                        <li class="item">
+                            <span class="w w1 first"><span>{{product_instruct.id}}</span></span>
+                            <span class="w w1"><span>{{product_instruct.liquidateType | liquidate_type}}</span></span>
+                            <span class="w w1"><span>￥{{product_instruct.amount | numformatting : 'Thousands'}}</span></span>
+                            <span class="w w1"><span>{{product_instruct.created | date:"yyyy.MM.dd HH:mm"}}</span></span>
+                            <span class="w w2"><span>{{product_instruct.serialNo}}</span></span>
+                            <span class="w w1"><span>{{product_instruct.finished | date:"yyyy.MM.dd HH:mm"}}</span></span>
+                            <span class="w w1"><span>{{product_instruct.status | liquidate_status}}</span></span>
+                            <span class="w w3"><span>{{product_instruct.remark}}</span></span>
+                        </li>
+                    </ul>
+                    <div class="resend active" ng-show="product_instruct.status==2" ng-click="closeThisDialog();cf.resendInstruct(product.id)">重发指令</div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>

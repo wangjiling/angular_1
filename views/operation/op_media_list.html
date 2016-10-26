@@ -1,0 +1,47 @@
+<div class="ml-con-wrap">
+  <div class="control-group">
+      <div class="controls">
+        <a class="btn del" ng-class="{'del':!om.checkF,'btn-primary':om.checkF}" ng-click="om.delBatchNewsClick()">删除</a>
+        <a class="btn btn-primary" ui-sref='operation.media_new'>新增</a>
+      </div>
+      <form class="search-wrap">
+          <input ng-change="om.searchInpChange()" ng-model="om.searchInp" type="text" class="form-control" placeholder="请输入关键字">
+          <i ng-click="om.searchNews();" class="svg-houtai_seach-dims svg-houtai_seach search-btn"></i>
+          <button ng-show="false" type = "submit" ng-click="om.searchNews();"></button>
+      </form>
+      <div class="search-num" ng-show="om.searchF && om.searchInp">共搜索到<span>{{om.mediaItems.length}}</span>条结果</div>
+  </div>
+  <div class="ml-list-con">
+      <div class="header">
+          <span class="cb-all"><label class="checkbox-inline cb-btn"><input type="checkbox" name="checkbox" ng-model="om.checkAllF" ng-change="om.checkAllClick()"></label> 全部</span>
+          <span class="w4 pj_name">标题</span>
+          <span class="w2">提交时间</span>
+          <span class="w3">类型</span>
+          <span class="w3">操作</span>
+      </div>
+      <ul class="items">
+          <li class="no-data" ng-show="!om.mediaItems||om.mediaItems.length==0">
+              <p><i class="svg-houtai_seachicon svg-houtai_seachicon-dims"></i>暂无查询结果</p>
+          </li>
+          <li class="item" ng-repeat="item in om.mediaItems">
+              <label class="checkbox-inline cb-btn">
+                  <input type="checkbox" name="checkbox" ng-model="om.checkbox[item.id]" ng-change="om.checkChange()" >
+              </label>
+              <span class="w4 pj_name">
+                  <span>{{item.title}}</span>
+                  <i ng-show="item.sort>0">置顶</i>
+              </span>
+              <span class="w2">{{item.created | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+              <span class="w3">{{item.category | media_type}}</span>
+              <span class="w3">
+                  <i ng-click="om.setTopClick(item.id, item.sort)" class="svg-houtai_news_1_a-dims svg-houtai_news_1_a" ng-class="{'svg-houtai_news_1_c svg-houtai_news_1_c-dims':item.sort>0,'svg-houtai_news_1_b svg-houtai_news_1_b-dims':of.topF}" ng-mouseenter="of.topF=true;" ng-mouseleave="of.topF=false;"></i>
+                  <i ng-click="om.delNewsClick(item.id)" class="svg-houtai_news_2_a-dims svg-houtai_news_2_a" ng-class="{'svg-houtai_news_2_b svg-houtai_news_2_b-dims':of.delF}" ng-mouseenter="of.delF=true;" ng-mouseleave="of.delF=false;"></i>
+                  <a target="_blank" ui-sref='operation.media_edit({id:item.id})'><i class="svg-houtai_news_3_a-dims svg-houtai_news_3_a" ng-class="{'svg-houtai_news_3_b svg-houtai_news_3_b-dims':of.editF}" ng-mouseenter="of.editF=true;" ng-mouseleave="of.editF=false;"></i></a>
+              </span>
+          </li>
+      </ul>
+      <div class="pagination_wrap" ng-show="om.mediaItems&&om.mediaItems.length>0">
+          <uib-pagination previous-text="<上一页" next-text="下一页>" total-items="om.pagination.bigTotalItems" ng-model="om.pagination.bigCurrentPage" max-size="om.pagination.maxSize" items-per-page='om.pagination.numPerPage' ng-change="om.pagination.pageChanged()" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+      </div>
+  </div>
+</div>

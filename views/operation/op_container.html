@@ -1,0 +1,16 @@
+<div class="bm-container">
+    <ul ng-if="!$stateParams.leftSideF" class="bm-left-side">
+        <li ui-sref-active="on"><a ui-sref='operation.funding_list'><i class="svg-houtai_lefticon_1-dims svg-houtai_lefticon_1"></i>众筹管理</a></li>
+        <li ng-class="{on: ($state.includes('operation.media_list')||$state.includes('operation.media_new')||$state.includes('operation.media_edit'))}"><a ui-sref='operation.media_list'><i class="svg-houtai_lefticon_2-dims svg-houtai_lefticon_2"></i>媒体中心</a></li>
+    </ul>
+    <div class="bm-content" ng-class="{'left-side-hide':$stateParams.leftSideF}">
+        <p class="breadcrumbs">当前位置：运营管理 >
+          <span class="item" ng-repeat="item in $stateParams.route">
+            <a ui-sref="{{item.url}}" ng-if="$index + 1 < $stateParams.route.length">{{item.title}}</a>
+            <span ng-if="$index + 1 == $stateParams.route.length">{{item.title}}</span>
+            <span ng-if="$index + 1 < $stateParams.route.length">></span>
+          </span>
+        </p>
+        <div ui-view></div>
+    </div>
+</div>

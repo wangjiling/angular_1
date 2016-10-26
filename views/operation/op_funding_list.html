@@ -1,0 +1,62 @@
+<div class="fl-wrap">
+    <uib-tabset active="active">
+        <uib-tab index="$index+1" ng-repeat="tab in of.tabList" heading="{{tab.title}}（{{tab.num}}）" select="of.getFundingList($index+1)">
+            <ng-include src="tab.templateUrl"></ng-include>
+        </uib-tab>
+    </uib-tabset>
+    <form class="search-wrap">
+        <input ng-model="of.searchInp" type="text" class="form-control" placeholder="项目名称 / 发布人">
+        <i ng-click="of.showSearchDialog();" class="svg-houtai_seach-dims svg-houtai_seach search-btn"></i>
+        <button ng-show="false" type = "submit" ng-click="of.showSearchDialog();"></button>
+    </form>
+    <script type="text/ng-template" id="of-search-dialog">
+        <div class="dialog-content">
+            <div class="d-header">搜索结果列表<i ng-click="closeThisDialog()" class="svg-btn-manageproject-close-white svg-btn-manageproject-close-white-dims"></i></div>
+            <div class="content">
+                <div class="top">
+                    <div class="search-status" ng-show="of.sDialog.loading"><i></i>正在搜索，请稍后...</div>
+                    <div class="search-status" ng-show="!of.sDialog.loading">共{{of.sDialog.pagination.bigTotalItems}}条搜索结果</div>
+                    <form class="search-wrap">
+                        <input ng-model="of.searchInp" type="text" class="form-control" placeholder="项目名称 / 发布人">
+                        <i ng-click="of.sDialog.fundingSearch();" class="svg-houtai_seach-dims svg-houtai_seach search-btn"></i>
+                        <button ng-show="false" type = "submit" ng-click="of.sDialog.fundingSearch();"></button>
+                    </form>
+                </div>
+                <div class="fl-list-con">
+                    <div class="header clearfix">
+                        <span class="w1 pj_name">封面 / 项目名称</span>
+                        <span class="w2">发布人</span>
+                        <span ng-click="of.sDialog.submitTimeClick()" class="w2 time">提交时间<i ng-class="{'svg-houtai_tableicon_2_a svg-houtai_tableicon_2_a-dims':of.sDialog.submitTimeF==0,'svg-houtai_tableicon_2_c svg-houtai_tableicon_2_c-dims':of.sDialog.submitTimeF==1,'svg-houtai_tableicon_2_b svg-houtai_tableicon_2_b-dims':of.sDialog.submitTimeF==2}"></i></span>
+                        <ui-select ng-model="of.sDialog.reviewStatus" class="w3 filterW" theme="select2" search-enabled="false" on-select="of.sDialog.reviewStatusClick()" ng-disabled="disabled" title="选择项目状态">
+                            <ui-select-match placeholder="项目状态">
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="status in of.sDialog.reviewStatusList track by $index">
+                                <span ng-bind="status.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="w3">操作</span>
+                    </div>
+                    <ul class="items" ng-class="{'l-items':of.sDialog.itemsF}">
+                        <li class="no-data" ng-show="!of.sDialog.pagination.currentPageItems||of.sDialog.pagination.currentPageItems.length==0">
+                            <p><i class="svg-houtai_seachicon svg-houtai_seachicon-dims"></i>暂无搜索结果</p>
+                        </li>
+                        <li class="item" ng-repeat="item in of.sDialog.pagination.currentPageItems">
+                            <span class="w1 pj_name">
+                                <img src="{{item.small_image||'img/houtai_pj_fengmian.png'}}" />
+                                <span><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>{{item.name}}</a></span>
+                            </span>
+                            <span class="w2">{{item.user_name}}</span>
+                            <span class="w2">{{item.published | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+                            <span class="w3">{{item.statusLabel}}</span>
+                            <span class="w3"><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>详情</a></span>
+                        </li>
+                    </ul>
+                    <div class="pagination_wrap" ng-show="of.sDialog.pagination.currentPageItems&&of.sDialog.pagination.currentPageItems.length>0">
+                        <uib-pagination previous-text="<上一页" next-text="下一页>" total-items="of.sDialog.pagination.bigTotalItems" ng-model="of.sDialog.pagination.bigCurrentPage" max-size="of.sDialog.pagination.maxSize" items-per-page='of.sDialog.pagination.numPerPage' ng-change="of.sDialog.pagination.pageChanged()" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>

@@ -1,0 +1,37 @@
+<div class="fl-check-wrap">
+    <p class="filter">
+        <span class="f_label">筛选：</span>
+        <span class="f_btn active">全部</span>
+        <span class="f_btn">回报中</span>
+        <span class="f_btn">众筹中</span>
+    </p>
+    <div class="fl-list-con">
+        <div class="header clearfix">
+            <span class="w1 pj_name">封面 / 项目名称</span>
+            <span class="w4">发布人</span>
+            <span ng-click="of.submitTimeClick()" class="w4 time">提交时间<i ng-class="{'svg-houtai_tableicon_2_a svg-houtai_tableicon_2_a-dims':of.submitTimeF==0,'svg-houtai_tableicon_2_c svg-houtai_tableicon_2_c-dims':of.submitTimeF==1,'svg-houtai_tableicon_2_b svg-houtai_tableicon_2_b-dims':of.submitTimeF==2}"></i></span>
+            <span ng-click="of.publishTimeClick()" class="w4 time">发布时间<i ng-class="{'svg-houtai_tableicon_2_a svg-houtai_tableicon_2_a-dims':of.publishTimeF==0,'svg-houtai_tableicon_2_c svg-houtai_tableicon_2_c-dims':of.publishTimeF==1,'svg-houtai_tableicon_2_b svg-houtai_tableicon_2_b-dims':of.publishTimeF==2}"></i></span>
+            <span class="w6">项目状态</span>
+            <span class="w5">操作</span>
+        </div>
+        <ul class="items">
+            <li class="no-data" ng-show="!of.pagination.currentPageItems||of.pagination.currentPageItems.length==0">
+                <p><i class="svg-houtai_seachicon svg-houtai_seachicon-dims"></i>暂无查询结果</p>
+            </li>
+            <li class="item" ng-repeat="item in of.pagination.currentPageItems">
+                <span class="w1 pj_name">
+                    <img ng-src="{{item.small_image||'img/houtai_pj_fengmian.png'}}" />
+                    <span><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>{{item.name}}</a></span>
+                </span>
+                <span class="w4">{{item.user_name}}</span>
+                <span class="w4">{{item.published | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+                <span class="w4">{{item.started | date:"yyyy.MM.dd HH:mm:ss"}}</span>
+                <span class="w6">{{item.statusLabel}}</span>
+                <span class="w5"><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>详情</a></span>
+            </li>
+        </ul>
+        <div class="pagination_wrap" ng-show="of.pagination.currentPageItems&&of.pagination.currentPageItems.length>0">
+            <uib-pagination previous-text="<上一页" next-text="下一页>" total-items="of.pagination.bigTotalItems" ng-model="of.pagination.bigCurrentPage" max-size="of.pagination.maxSize" items-per-page='of.pagination.numPerPage' ng-change="of.pagination.pageChanged()" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>

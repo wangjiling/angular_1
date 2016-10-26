@@ -1,0 +1,74 @@
+@left-aside: 250px;
+@header-height: 100px;
+@header-bgColor: #1E2327;
+
+.table{
+    display: table;
+}
+
+.table-collum{
+    display: table-column;
+}
+
+.table-cell{
+    display: table-cell;
+}
+
+.icon{
+    display: inline-block;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+/* reset for all browsers */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+    font-family: Microsoft YaHei, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1;
+    font-size: 14px;
+    min-width: 1250px;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*隐藏IE浏览器自带的文本删除按钮和密码查看按钮*/
+::-ms-clear, ::-ms-reveal{
+    display: none;
+}
+
+button:disabled, html input[disabled] {
+    cursor: no-drop;
+}

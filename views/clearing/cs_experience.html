@@ -1,0 +1,99 @@
+<div class="ce-con-wrap">
+    <div class="control-group">
+        <form class="form-inline search-wrap">
+            <div class="line">
+                <div class="form-group inpW">
+                    <label for="order_id">订单编号</label>
+                    <input ng-model="ce.orderId" type="text" class="form-control inp" id="order_id">
+                </div>
+                <div class="form-group inpW">
+                    <label for="pj_code">项目代码</label>
+                    <input ng-model="ce.projectCode" type="text" class="form-control inp" id="pj_code">
+                </div>
+                <div class="form-group inpW">
+                    <label for="pro_name">产品名称</label>
+                    <input ng-model="ce.productName" type="text" class="form-control inp" id="pro_name">
+                </div>
+            </div>
+        </form>
+        <div class="controls">
+            <button class="btn" ng-click="ce.queryFinance()">查询</button>
+            <button class="btn" ng-click="ce.reset()">重置</button>
+        </div>
+    </div>
+    <div class="ce-list-con">
+        <div class="search-result">
+            <span class="s_btn" ng-class="{active:ce.checkF}" ng-click="ce.batchReturnMoney()">批量回款</span>
+            <span class="s_btn" ng-class="{active:ce.pagination.bigTotalItems>0}" ng-click="ce.allReturnMoneyClick()">全部回款</span>
+            <span> | 累计可回款总金额：￥{{ce.allReturnMoney}}</span>
+            <div class="search-num">共有<span>{{ce.pagination.bigTotalItems}}</span>条产品记录</div>
+        </div>
+        <div class="items-wrap clearfix">
+            <div class="l">
+                <div class="header clearfix">
+                    <span class="w w0">
+                        <label class="checkbox-inline cb-btn">
+                            <input type="checkbox" name="checkbox" ng-model="ce.checkAllF" ng-change="ce.checkAllClick()" >
+                        </label>
+                    </span>
+                </div>
+                <ul class="items">
+                    <li class="item clearfix" ng-class="{err:item.status==8}" ng-repeat="item in ce.financeItems">
+                        <span class="w w0">
+                            <label class="checkbox-inline cb-btn">
+                                <input type="checkbox" name="checkbox" ng-model="ce.checkbox[item.orderId+','+item.status]" ng-change="ce.checkChange()" >
+                            </label>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="r clearfix">
+                <div class="left">
+                    <div class="l_wrap">
+                        <div class="header clearfix">
+                            <span class="w w2">订单编号</span>
+                            <span class="w w1">订单创建时间</span>
+                            <span class="w w3">产品名称</span>
+                            <span class="w w1">项目代码</span>
+                            <span class="w w1">起息日</span>
+                            <span class="w w1">到期日</span>
+                            <span class="w w1">订单状态</span>
+                            <span class="w w1">回款金额</span>
+                        </div>
+                        <ul class="items">
+                            <li class="item clearfix" ng-class="{err:item.status==8}" ng-repeat="item in ce.financeItems">
+                                <span class="w w2">{{item.orderId}}</span>
+                                <span class="w w1"><span>{{item.orderCreated | date:"yyyy.MM.dd HH:mm:ss"}}</span></span>
+                                <span class="w w3"><span>{{item.productName}}</span></span>
+                                <span class="w w1"><span>{{item.projectCode}}</span></span>
+                                <span class="w w1">{{item.benefitStartDate | date:"yyyy.MM.dd"}}</span>
+                                <span class="w w1">{{item.maturityDate | date:"yyyy.MM.dd"}}</span>
+                                <span class="w w1">{{item.status}}</span>
+                                <span class="w w1">￥{{item.predictIncome}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="header clearfix">
+                        <span class="w w0 last">操作</span>
+                    </div>
+                    <ul class="items">
+                        <li class="item clearfix" ng-class="{err:item.status==8}" ng-repeat="item in ce.financeItems">
+                            <span class="w w0 operate">
+                                <span ng-show="item.status!=7">--</span>
+                                <a ng-show="item.status==7" ng-click="ce.batchReturnMoney(item.orderId)">回款</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="no-data" ng-show="!ce.financeItems||ce.financeItems.length==0">
+                <p><i class="svg-houtai_seachicon svg-houtai_seachicon-dims"></i>暂无查询结果</p>
+            </div>
+        </div>
+        <div class="pagination_wrap" ng-show="ce.financeItems&&ce.financeItems.length>0">
+            <uib-pagination previous-text="<上一页" next-text="下一页>" total-items="ce.pagination.bigTotalItems" ng-model="ce.pagination.bigCurrentPage" max-size="ce.pagination.maxSize" items-per-page='ce.pagination.numPerPage' ng-change="ce.pagination.pageChanged()" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>

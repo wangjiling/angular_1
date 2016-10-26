@@ -1,0 +1,42 @@
+.bm-container{
+    //overflow: hidden;
+    min-width: 1050px;
+    font-size: 12px;
+    position: relative;
+    background-color: rgba(30,35,39,0.53);
+}
+.bm-left-side{
+    float: left;
+    color: #fff;
+    font-size: 14px;
+    width: @left-aside;
+    padding-top: 45px;
+    li{
+        a{
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+            &:hover, &:focus{
+                text-decoration: none;
+            }
+            i{
+                position: relative;
+                top: 8px;
+                display: inline-block;
+                margin: 0 20px;
+            }
+        }
+    }
+    li.on{
+        background-color: @header-bgColor;
+    }
+}
+.bm-content{
+    margin-left: 250px;
+    min-height: 925px;
+    background-color: #f6f6f6;
+    &.left-side-hide{
+        margin-left: 0;
+    }
+}
