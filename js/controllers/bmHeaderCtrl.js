@@ -1,6 +1,9 @@
-app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', 'common', function(CONFIG, $scope, $window, $log, user, common) {
+app.controller('BmHeaderCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$log', 'user', 'common', function(CONFIG, $rootScope, $scope, $window, $log, user, common) {
     'use strict';
     $log.debug('BmHeaderCtrl start...');
+
+    //mockup
+    if(!$rootScope.userName) $window.location.href = '/#/login';
 
     $scope.bm = {
         headerNavList:[
@@ -56,7 +59,7 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', '
     };
 
     //获取用户信息
-    /*user.readUser().then(function(response){
+    /*user.getUser().then(function(response){
         response = response.data;
         if (response && response.status == 0 && response.data){
             $scope.bm.userName = response.data.username;
@@ -72,5 +75,9 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', '
                 $window.location.href = '/#/login';
             }
         });*/
+
+        //mockup
+        $rootScope.userName = '';
+        $window.location.href = '/#/login';
     };
 }]);
