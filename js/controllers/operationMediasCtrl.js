@@ -2,7 +2,6 @@ app.controller('MediaListCtrl', ['$scope','$state','$log', 'operation', function
     'use strict';
     $log.debug('MediaListCtrl start...');
 
-    /*list*/
     $scope.om = {
         searchF: false,//搜索标志
         checkF: false,//选择标志
@@ -19,7 +18,7 @@ app.controller('MediaListCtrl', ['$scope','$state','$log', 'operation', function
 
     //获取媒体列表
     var getMediaList = function(){
-        operation.newsList({
+        /*operation.newsList({
             page: $scope.om.pagination.bigCurrentPage,
             pageSize: $scope.om.pagination.numPerPage,
             orderColumn: null,
@@ -35,7 +34,7 @@ app.controller('MediaListCtrl', ['$scope','$state','$log', 'operation', function
                     $scope.om.checkbox[item.id] = false;
                 });
             }
-        });
+        });*/
     };
 
     /*check 用户是否有选择*/
@@ -55,43 +54,13 @@ app.controller('MediaListCtrl', ['$scope','$state','$log', 'operation', function
     };
     $scope.om.init();
 
-    /*分页*/
+    //分页
     $scope.om.pagination.setPage = function (pageNo) {
         $scope.om.pagination.bigCurrentPage = pageNo;
     };
     $scope.om.pagination.pageChanged = function() {
         $log.log('Page changed to: ' + $scope.om.pagination.bigCurrentPage);
         getMediaList();
-    };
-
-    //新闻置顶/取消置顶
-    $scope.om.setTopClick = function(newsId, sort){
-        if(sort>0){//取消置顶
-            operation.offTopNews({
-                newsId: newsId
-            }).then(function(response){
-                response = response.data;
-                if (response && response.status == 0){
-                    getMediaList();
-                }
-            });
-        }else{//置顶
-            operation.topNews({
-                newsId: newsId
-            }).then(function(response){
-                response = response.data;
-                if (response && response.status == 0){
-                    getMediaList();
-                }
-            });
-        }
-    };
-    //删除单个新闻
-    $scope.om.delNewsClick = function(newsId){
-    };
-    //删除批量新闻
-    $scope.om.delBatchNewsClick = function(){
-        if(!$scope.om.checkF) return;
     };
 
     //全选事件处理

@@ -21,13 +21,13 @@
             <li class="item" ng-repeat="item in of.pagination.currentPageItems">
                 <span class="w1 pj_name">
                     <img ng-src="{{item.small_image||'img/houtai_pj_fengmian.png'}}" />
-                    <span><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>{{item.name}}</a></span>
+                    <span><a target="_blank" ui-sref='operation.funding_detail({id:item.pid})'>{{item.name}}</a></span>
                 </span>
                 <span class="w4">{{item.user_name}}</span>
                 <span class="w4">{{item.published | date:"yyyy.MM.dd HH:mm:ss"}}</span>
                 <span class="w4">{{item.started | date:"yyyy.MM.dd HH:mm:ss"}}</span>
                 <span class="w6">{{item.statusLabel}}</span>
-                <span class="w5"><a target="_blank" ui-sref='operation.funding_view({id:item.pid})'>详情</a></span>
+                <span class="w5"><a target="_blank" ui-sref='operation.funding_detail({id:item.pid})'>详情</a></span>
             </li>
         </ul>
         <div class="pagination_wrap" ng-show="of.pagination.currentPageItems&&of.pagination.currentPageItems.length>0">

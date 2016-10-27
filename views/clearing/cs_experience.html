@@ -51,25 +51,25 @@
                 <div class="left">
                     <div class="l_wrap">
                         <div class="header clearfix">
-                            <span class="w w2">订单编号</span>
-                            <span class="w w1">订单创建时间</span>
-                            <span class="w w3">产品名称</span>
-                            <span class="w w1">项目代码</span>
-                            <span class="w w1">起息日</span>
-                            <span class="w w1">到期日</span>
-                            <span class="w w1">订单状态</span>
-                            <span class="w w1">回款金额</span>
+                            <span class="w w2">---</span>
+                            <span class="w w1">---</span>
+                            <span class="w w3">---</span>
+                            <span class="w w1">---</span>
+                            <span class="w w1">---</span>
+                            <span class="w w1">---</span>
+                            <span class="w w1">---</span>
+                            <span class="w w1">---</span>
                         </div>
                         <ul class="items">
                             <li class="item clearfix" ng-class="{err:item.status==8}" ng-repeat="item in ce.financeItems">
-                                <span class="w w2">{{item.orderId}}</span>
-                                <span class="w w1"><span>{{item.orderCreated | date:"yyyy.MM.dd HH:mm:ss"}}</span></span>
-                                <span class="w w3"><span>{{item.productName}}</span></span>
-                                <span class="w w1"><span>{{item.projectCode}}</span></span>
-                                <span class="w w1">{{item.benefitStartDate | date:"yyyy.MM.dd"}}</span>
-                                <span class="w w1">{{item.maturityDate | date:"yyyy.MM.dd"}}</span>
-                                <span class="w w1">{{item.status}}</span>
-                                <span class="w w1">￥{{item.predictIncome}}</span>
+                                <span class="w w2">---</span>
+                                <span class="w w1">---</span>
+                                <span class="w w3">---</span>
+                                <span class="w w1">---</span>
+                                <span class="w w1">---</span>
+                                <span class="w w1">---</span>
+                                <span class="w w1">---</span>
+                                <span class="w w1">---</span>
                             </li>
                         </ul>
                     </div>
@@ -81,8 +81,7 @@
                     <ul class="items">
                         <li class="item clearfix" ng-class="{err:item.status==8}" ng-repeat="item in ce.financeItems">
                             <span class="w w0 operate">
-                                <span ng-show="item.status!=7">--</span>
-                                <a ng-show="item.status==7" ng-click="ce.batchReturnMoney(item.orderId)">回款</a>
+                                <span>---</span>
                             </span>
                         </li>
                     </ul>

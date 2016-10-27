@@ -1,4 +1,4 @@
-app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', 'utility', function(CONFIG, $scope, $window, $log, user, utility) {
+app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', 'common', function(CONFIG, $scope, $window, $log, user, common) {
     'use strict';
     $log.debug('BmHeaderCtrl start...');
 
@@ -56,21 +56,21 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$scope', '$window', '$log', 'user', '
     };
 
     //获取用户信息
-    user.readUser().then(function(response){
+    /*user.readUser().then(function(response){
         response = response.data;
         if (response && response.status == 0 && response.data){
             $scope.bm.userName = response.data.username;
         }
-    });
+    });*/
 
     //注销
     $scope.bm.logout = function(){
-        user.logoutUser().then(function(response){
+        /*user.logoutUser().then(function(response){
             response = response.data;
             if (response && response.status == 0 ){
-                utility.delCookie('authtoken');
-                $window.location.href = CONFIG.login;
+                common.delCookie('authtoken');
+                $window.location.href = '/#/login';
             }
-        });
+        });*/
     };
 }]);

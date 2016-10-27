@@ -2,7 +2,7 @@
   <div class="control-group">
       <div class="controls">
         <a class="btn del" ng-class="{'del':!om.checkF,'btn-primary':om.checkF}" ng-click="om.delBatchNewsClick()">删除</a>
-        <a class="btn btn-primary" ui-sref='operation.media_new'>新增</a>
+        <a class="btn btn-primary">新增</a>
       </div>
       <form class="search-wrap">
           <input ng-change="om.searchInpChange()" ng-model="om.searchInp" type="text" class="form-control" placeholder="请输入关键字">
@@ -32,11 +32,11 @@
                   <i ng-show="item.sort>0">置顶</i>
               </span>
               <span class="w2">{{item.created | date:"yyyy.MM.dd HH:mm:ss"}}</span>
-              <span class="w3">{{item.category | media_type}}</span>
+              <span class="w3">{{item.category}}</span>
               <span class="w3">
                   <i ng-click="om.setTopClick(item.id, item.sort)" class="svg-houtai_news_1_a-dims svg-houtai_news_1_a" ng-class="{'svg-houtai_news_1_c svg-houtai_news_1_c-dims':item.sort>0,'svg-houtai_news_1_b svg-houtai_news_1_b-dims':of.topF}" ng-mouseenter="of.topF=true;" ng-mouseleave="of.topF=false;"></i>
                   <i ng-click="om.delNewsClick(item.id)" class="svg-houtai_news_2_a-dims svg-houtai_news_2_a" ng-class="{'svg-houtai_news_2_b svg-houtai_news_2_b-dims':of.delF}" ng-mouseenter="of.delF=true;" ng-mouseleave="of.delF=false;"></i>
-                  <a target="_blank" ui-sref='operation.media_edit({id:item.id})'><i class="svg-houtai_news_3_a-dims svg-houtai_news_3_a" ng-class="{'svg-houtai_news_3_b svg-houtai_news_3_b-dims':of.editF}" ng-mouseenter="of.editF=true;" ng-mouseleave="of.editF=false;"></i></a>
+                  <a target="_blank"><i class="svg-houtai_news_3_a-dims svg-houtai_news_3_a" ng-class="{'svg-houtai_news_3_b svg-houtai_news_3_b-dims':of.editF}" ng-mouseenter="of.editF=true;" ng-mouseleave="of.editF=false;"></i></a>
               </span>
           </li>
       </ul>
