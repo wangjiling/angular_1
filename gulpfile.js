@@ -83,8 +83,14 @@ gulp.task('copy', ['sprite', 'clean'], function(){
         .pipe(copy(buildConfig.build.rootPath));
 });
 
+/*copy bootstrap文件*/
+gulp.task('copy_bootstrap', ['clean'], function(){
+    return gulp.src('node_modules/bootstrap/dist/fonts/*', {base: 'node_modules/bootstrap/dist'})
+        .pipe(gulp.dest(buildConfig.build.rootPath));
+});
+
 /*添加版本号，避免缓存*/
-gulp.task('replace', ['htmlmin', 'less2css', 'sprite', 'usemin', 'copy'], function(){
+gulp.task('replace', ['htmlmin', 'less2css', 'sprite', 'usemin', 'copy', 'copy_bootstrap'], function(){
     gulp.src(['build/**/*.html', 'build/**/*.css'])
         .pipe(replace(/\.css/g, ".css?v=" + version))
         .pipe(replace(/\.js/g, ".js?v=" + version))

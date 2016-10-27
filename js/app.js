@@ -22,6 +22,7 @@ var app = angular.module('app', [
                 $rootScope.$stateParams = $stateParams;
             }
         ]
-    ).constant('CONFIG', {
+    )
+    .constant('CONFIG', {
         host: ''
     });

@@ -2,9 +2,6 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$l
     'use strict';
     $log.debug('BmHeaderCtrl start...');
 
-    //mockup
-    if(!$rootScope.userName) $window.location.href = '/#/login';
-
     $scope.bm = {
         headerNavList:[
             {
@@ -80,4 +77,7 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$l
         $rootScope.userName = '';
         $window.location.href = '/#/login';
     };
+
+    //mockup
+    if(!$rootScope.userName) $window.location.href = '/#/login';
 }]);
