@@ -27,6 +27,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
                 templateUrl: 'views/operation/op_funding_list.html'
             })
+            .state('operation.funding_detail', {
+                url: '/fundings/:id',
+                controller: 'OperationFundingDetailCtrl',
+                params: {
+                    leftSideF: true,//隐藏左边导航栏
+                    route : [{
+                        title:"众筹管理",
+                        url: "operation.funding_list"
+                    },{
+                        title:"项目详情",
+                        url: ""
+                    }]
+                },
+                templateUrl: 'views/operation/op_funding_detail.html'
+            })
             .state('operation.media_list', {
                 url: '/media/list',
                 controller: 'MediaListCtrl',
