@@ -6,7 +6,7 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', '$log', '$state', function(
 
     $scope.lg.login = function(){
         if($scope.lg.phone && $scope.lg.password){
-            $rootScope.userName = 'xxx';
+            $rootScope.userName = $scope.lg.phone;
             $state.go('operation.funding_list');
         }
     }
