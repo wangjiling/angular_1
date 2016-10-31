@@ -9,14 +9,14 @@
     <meta name="keywords" content="后台管理系统">
     <meta name="author" content="后台管理系统">
     <title>后台管理系统</title>
-    <style>[ng-cloak] { display: none; }</style>
+    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
     <!-- build:css css/main.css -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/sprite.css" />
     <!-- endbuild -->
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-cloak>
     <div ng-controller="BmHeaderCtrl" ng-include="'views/header.html'"></div>
     <div class="app" id="app" ui-view></div>
     <div ng-include="'views/footer.html'"></div>
