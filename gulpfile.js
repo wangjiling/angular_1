@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     path = require('path'),//path
     crypto = require('crypto');
 
-var buildConfig = require('./config.js');
+var buildConfig = require('./gulp.config.js');
 var version = crypto.createHash('md5').update(new Date().getTime().toString()).digest('hex').slice(0, 16);
 
 /*清空打包目录*/
@@ -27,7 +27,7 @@ gulp.task('clean_css', function(){
 });
 /* html打包 */
 gulp.task('htmlmin', ['clean'], function () {
-    return gulp.src(buildConfig.src.view)
+    return gulp.src('views/**/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(buildConfig.build.view))
 });
@@ -91,13 +91,13 @@ gulp.task('copy_bootstrap', ['clean'], function(){
 
 /*添加版本号，避免缓存*/
 gulp.task('replace', ['htmlmin', 'less2css', 'sprite', 'usemin', 'copy', 'copy_bootstrap'], function(){
-    gulp.src(['build/**/*.html', 'build/**/*.css'])
+    gulp.src([buildConfig.build.rootPath+'/**/*.html', buildConfig.build.rootPath+'/**/*.css'])
         .pipe(replace(/\.css/g, ".css?v=" + version))
         .pipe(replace(/\.js/g, ".js?v=" + version))
         .pipe(replace(/\.png/g, ".png?v=" + version))
         .pipe(replace(/\.jpg/g, ".jpg?v=" + version))
         .pipe(replace(/\.gif/g, ".gif?v=" + version))
-        .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest(buildConfig.build.rootPath));
 });
 
 /*开发环境*/

@@ -1,6 +1,6 @@
-app.controller('BmHeaderCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$log', 'user', 'common', function(CONFIG, $rootScope, $scope, $window, $log, user, common) {
+app.controller('AppCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$log', 'user', 'common', function(CONFIG, $rootScope, $scope, $window, $log, user, common) {
     'use strict';
-    $log.debug('BmHeaderCtrl start...');
+    $log.debug('AppCtrl start...');
 
     $scope.bm = {
         headerNavList:[
@@ -69,15 +69,15 @@ app.controller('BmHeaderCtrl', ['CONFIG', '$rootScope', '$scope', '$window', '$l
             response = response.data;
             if (response && response.status == 0 ){
                 common.delCookie('authtoken');
-                $window.location.href = '/#/login';
+                $window.location.href = '#/login';
             }
         });*/
 
         //mockup
         $rootScope.userName = '';
-        $window.location.href = '/#/login';
+        $window.location.href = '#/login';
     };
 
     //mockup
-    if(!$rootScope.userName) $window.location.href = '/#/login';
+    if(!$rootScope.userName) $window.location.href = '#/login';
 }]);

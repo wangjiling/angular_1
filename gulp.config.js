@@ -9,12 +9,6 @@ var FileConfig  = {
         css: 'build/css/',
         js: 'build/js/',
         img: 'build/img/'
-    },
-
-    /* src路径 */
-    src : {
-        view: 'views/**/*.html',
-        img: 'img/**/*'
     }
 };
 

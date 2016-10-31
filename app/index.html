@@ -11,20 +11,20 @@
     <title>后台管理系统</title>
     <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
     <!-- build:css css/main.css -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/sprite.css" />
     <!-- endbuild -->
 </head>
-<body ng-app="app" ng-cloak>
-    <div ng-controller="BmHeaderCtrl" ng-include="'views/header.html'"></div>
-    <div class="app" id="app" ui-view></div>
+<body ng-app="app" ng-controller="AppCtrl"  ng-cloak>
+    <div ng-include="'views/header.html'"></div>
+    <div ui-view></div>
     <div ng-include="'views/footer.html'"></div>
 
     <!-- build:libjs js/libs.js -->
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
     <!-- endbuild -->
 
     <!-- build:mainjs js/main.js -->
@@ -40,7 +40,7 @@
     <script src="js/services/clearing.js"></script>
     <!--controllers-->
     <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/controllers/bmHeaderCtrl.js"></script>
+    <script src="js/controllers/appCtrl.js"></script>
     <script src="js/controllers/operationCtrl.js"></script>
     <script src="js/controllers/operationFundingsCtrl.js"></script>
     <script src="js/controllers/operationFundingDetailCtrl.js"></script>

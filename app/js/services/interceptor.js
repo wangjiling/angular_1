@@ -2,7 +2,9 @@ app.factory('AuHttpInterceptor', ['$q', '$window', function ($q, $window) {
     return {
         response: function (response) {
             if (response && response.data && response.data.status === -1001){
-                $window.location.href = '/#/login';
+                //vincent-todo
+                //统一处理请求错误
+                $window.location.href = '#/login';
             }
             return response;
         },
