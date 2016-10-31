@@ -12,7 +12,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             })
             .state('operation', {
                 url: '/operation',
-                abstract: true,
+                abstract: true,//表明此状态不能被显性激活，只能被子状态隐性激活
                 controller: 'OperationCtrl',
                 templateUrl: 'views/operation/op_container.html'
             })
@@ -29,7 +29,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             })
             .state('operation.funding_detail', {
                 url: '/fundings/:id',
-                controller: 'OperationFundingDetailCtrl',
+                controller: 'FundingDetailCtrl',
                 params: {
                     leftSideF: true,//隐藏左边导航栏
                     route : [{
