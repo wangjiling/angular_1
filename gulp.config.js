@@ -2,9 +2,19 @@
 
 /*build config*/
 var FileConfig  = {
+    /*源文件位置*/
+    src : {
+        rootPath: 'app/',
+        view: 'app/views/',
+        less: 'app/less/',
+        css: 'app/css/',
+        js: 'app/js/',
+        img: 'app/img/'
+    },
+
     /* 打包输出位置 */
     build : {
-        rootPath: 'build',
+        rootPath: 'build/',
         view: 'build/views/',
         css: 'build/css/',
         js: 'build/js/',

@@ -17,24 +17,24 @@ var version = crypto.createHash('md5').update(new Date().getTime().toString()).d
 
 /*清空打包目录*/
 gulp.task('clean', function(){
-    return gulp.src([buildConfig.build.rootPath], {read:false})
+    return gulp.src(buildConfig.build.rootPath, {read:false})
         .pipe(clean());
 });
 /*清空css目录*/
 gulp.task('clean_css', function(){
-    return gulp.src('css', {read:false})
+    return gulp.src(buildConfig.src.css, {read:false})
         .pipe(clean());
 });
 /* html打包 */
 gulp.task('htmlmin', ['clean'], function () {
-    return gulp.src('views/**/*.html')
+    return gulp.src(buildConfig.src.view+'**/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(buildConfig.build.view))
 });
 
 /*优化替换*/
 gulp.task('usemin', ['less2css', 'sprite', 'clean'], function() {
-    return gulp.src('index.html')
+    return gulp.src(buildConfig.src.rootPath+'index.html')
         .pipe(usemin({
             libjs: [uglify({mangle:false})],
             mainjs: [uglify({mangle:false})],
@@ -45,14 +45,14 @@ gulp.task('usemin', ['less2css', 'sprite', 'clean'], function() {
 
 /*less转为css*/
 gulp.task('less2css', ['clean_css'], function() {
-    return gulp.src('less/main.less')
+    return gulp.src(buildConfig.src.less+'main.less')
         .pipe(less())
-        .pipe(gulp.dest('css'));
+        .pipe(gulp.dest(buildConfig.src.css));
 });
 
 /*sprite合并svg*/
 gulp.task('sprite', ['clean_css'], function() {
-    return gulp.src('img/**/*.svg')
+    return gulp.src(buildConfig.src.img+'**/*.svg')
         .pipe(svgSprite({
             shape: {
                 id:{
@@ -61,10 +61,10 @@ gulp.task('sprite', ['clean_css'], function() {
                     }
                 }
             },
-            dest: 'css',
+            dest: buildConfig.src.css,
             mode: {
                 css :{
-                    dest:'css',
+                    dest:buildConfig.src.css,
                     render:{
                         css:true
                     },
@@ -79,8 +79,12 @@ gulp.task('sprite', ['clean_css'], function() {
 
 /*copy文件*/
 gulp.task('copy', ['sprite', 'clean'], function(){
-    return gulp.src(['img/**/*.png', 'img/**/*.gif', 'css/svg/*svg', 'favicon.ico'])
-        .pipe(copy(buildConfig.build.rootPath));
+    return gulp.src([
+        buildConfig.src.rootPath+'img/**/*.png',
+        buildConfig.src.rootPath+'img/**/*.gif',
+        buildConfig.src.rootPath+'css/svg/*.svg',
+        buildConfig.src.rootPath+'favicon.ico'])
+        .pipe(copy(buildConfig.build.rootPath, {prefix:1}));
 });
 
 /*copy bootstrap文件*/
