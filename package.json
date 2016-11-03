@@ -1,5 +1,5 @@
 {
-  "name": "angular_1_demo",
+  "name": "angular_1",
   "version": "0.0.1",
   "description": "angular1 demo",
   "main": "gulpfile.js",
@@ -19,11 +19,5 @@
     "gulp-svg-sprite": "^1.3.6",
     "gulp-uglify": "^2.0.0",
     "gulp-usemin": "^0.3.25"
-  },
-  "dependencies": {
-    "angular": "^1.5.8",
-    "angular-ui-bootstrap": "^2.2.0",
-    "angular-ui-router": "^0.3.1",
-    "bootstrap": "^3.3.7"
   }
 }
