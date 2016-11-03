@@ -89,7 +89,7 @@ gulp.task('copy', ['sprite', 'clean'], function(){
 
 /*copy bootstrap文件*/
 gulp.task('copy_bootstrap', ['clean'], function(){
-    return gulp.src('app/bower_components/bootstrap/dist/fonts/*', {base: 'app/bower_components/bootstrap/dist'})
+    return gulp.src(buildConfig.bowerDir+'bootstrap/dist/fonts/*', {base: buildConfig.bowerDir+'bootstrap/dist'})
         .pipe(gulp.dest(buildConfig.build.rootPath));
 });
 

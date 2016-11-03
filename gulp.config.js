@@ -2,6 +2,9 @@
 
 /*build config*/
 var FileConfig  = {
+    /*bower directory*/
+    bowerDir: 'app/bower_components/',
+
     /*源文件位置*/
     src : {
         rootPath: 'app/',
