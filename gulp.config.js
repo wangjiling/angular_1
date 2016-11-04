@@ -12,7 +12,7 @@ var FileConfig  = {
         less: 'app/less/',
         css: 'app/css/',
         js: 'app/js/',
-        img: 'app/img/'
+        img: 'app/images/'
     },
 
     /* 打包输出位置 */
@@ -21,7 +21,7 @@ var FileConfig  = {
         view: 'build/views/',
         css: 'build/css/',
         js: 'build/js/',
-        img: 'build/img/'
+        img: 'build/images/'
     }
 };
 

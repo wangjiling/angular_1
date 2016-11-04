@@ -80,9 +80,9 @@ gulp.task('sprite', ['clean_css'], function() {
 /*copy文件*/
 gulp.task('copy', ['sprite', 'clean'], function(){
     return gulp.src([
-        buildConfig.src.rootPath+'img/**/*.png',
-        buildConfig.src.rootPath+'img/**/*.gif',
-        buildConfig.src.rootPath+'css/svg/*.svg',
+        buildConfig.src.img+'**/*.png',
+        buildConfig.src.img+'**/*.gif',
+        buildConfig.src.css+'svg/*.svg',
         buildConfig.src.rootPath+'favicon.ico'])
         .pipe(copy(buildConfig.build.rootPath, {prefix:1}));
 });
@@ -107,7 +107,7 @@ gulp.task('replace', ['htmlmin', 'less2css', 'sprite', 'usemin', 'copy', 'copy_b
 /*开发环境*/
 gulp.task('default', ['less2css', 'sprite'], function(){
     /*监视文件*/
-    gulp.watch(['less/**/*.less', 'img/**/*.svg'], ['less2css', 'sprite'], function(event) {
+    gulp.watch([buildConfig.src.less+'**/*.less', buildConfig.src.img+'**/*.svg'], ['less2css', 'sprite'], function(event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 });
